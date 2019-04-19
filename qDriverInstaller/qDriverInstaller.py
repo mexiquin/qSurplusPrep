@@ -77,8 +77,18 @@ def downloadToDir(url, outDir):
         directory = '%s/%s' % (outDir, fileName)
         requestor = requests.get(url, allow_redirects = True)
 
-        file = open(directory, "wb")
-        file.write(requestor.content)
+        print("Downloading %s" % fileName)
+
+        # Some exception handling for file writing stuff
+        try:
+            file = open(directory, "wb")
+            file.write(requestor.content)
+        except IOError as e:
+            print("Error writing file %s" % e)
+
+        else:
+            print("Download of %s Complete" % fileName)
+
 
 # Installs the drivers utilizing ITS's driver library
 def installNAUDrivers():
@@ -90,6 +100,9 @@ def printInterface():
 
 def printCowsay(input):
     cowsay.cow(input)
+
+def printInstructions():
+    pass
 
 # Finds the name of the file based on the url name (Works!)
 def fileNameFromURL(url):
