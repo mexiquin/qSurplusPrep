@@ -19,18 +19,13 @@ Steps of Execution:
 
 '''
 
-import os
-import sys
-import glob
-import requests
-import subprocess
-import pyfiglet
-import cowsay
+import os, sys, glob, requests, subprocess, pyfiglet, cowsay, time
 
 # constant for finding the scripts dir with all dependencies
 # as well as constant for the desktop directory of any given machine
 scriptsDir =  os.path.join(os.getcwd(), 'Scripts')
 desktopDir = os.path.join(os.environ["HOMEPATH"], "Desktop")
+downloadBool = False
 
 # Make sure to update this URL every time that windows 10 releases a major update
 mediaCreationToolURL = "https://software-download.microsoft.com/download/pr/MediaCreationTool1809.exe"
@@ -43,16 +38,25 @@ def main():
     #printInterface()
     printCowsay("Quinton's Driver Installer: Version 2.0")
 
+    os.chdir(scriptsDir)
+
     # take input for what install is wanted
-    installChoice = input("(1) Install Network\n(2) Install Dell Command Update\n(ENTER) Both\n")
+    installChoice = input("(1) Install Network\n(2) Install Dell Command Update\n(3) Install ITS Drivers\n(ENTER) Both\n")
 
     if "1" in installChoice:
         installNetwork()
     elif "2" in installChoice:
         installDell()
-    else:
+    elif "3" in installChoice:
+        installNAUDrivers()
+    elif installChoice == "":
         installNetwork()
         installDell()
+        installNAUDrivers()
+    else:
+        print("Error: Input value not valid")
+        time.sleep(3)
+        sys.exit()
 
     # Download Media Creation Tool to Desktop\
     downloadToDir(mediaCreationToolURL, desktopDir)
@@ -60,7 +64,7 @@ def main():
 
 # Searches direcory for file that contains given keywords
 def findExecutable(keyword):
-	for name in glob.glob('Scripts/%s.exe' % keyword):
+	for name in glob.glob('%s*.exe' % keyword):
 		return name
 
 # Install Dell Command update for later manual use (Works!)
@@ -92,7 +96,7 @@ def downloadToDir(url, outDir):
 
 # Installs the drivers utilizing ITS's driver library
 def installNAUDrivers():
-    pass
+    subprocess.run("NAUDriver.bat")
 
 def printInterface():
     welcomeBanner = pyfiglet.figlet_format("Quinton's\nDriver\nInstaller")
