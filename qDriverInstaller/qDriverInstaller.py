@@ -24,7 +24,7 @@ import os, sys, glob, requests, subprocess, pyfiglet, cowsay, time
 # constant for finding the scripts dir with all dependencies
 # as well as constant for the desktop directory of any given machine
 scriptsDir =  os.path.join(os.getcwd(), 'Scripts')
-desktopDir = os.path.join(os.environ["HOMEPATH"], "Desktop")
+desktopDir = os.path.join(os.environ["USERPROFILE"], "Desktop")
 downloadBool = False
 
 # Make sure to update this URL every time that windows 10 releases a major update
@@ -41,7 +41,7 @@ def main():
     os.chdir(scriptsDir)
 
     # take input for what install is wanted
-    installChoice = input("(1) Install Network\n(2) Install Dell Command Update\n(3) Install ITS Drivers\n(ENTER) Both\n")
+    installChoice = input("(1) Install Network\n(2) Install Dell Command Update\n(3) Install ITS Drivers\n(4) Download Media Creation Tool\n(ENTER) Both\n")
 
     if "1" in installChoice:
         installNetwork()
@@ -49,17 +49,18 @@ def main():
         installDell()
     elif "3" in installChoice:
         installNAUDrivers()
+    elif "4" in installChoice:
+        downloadToDir(mediaCreationToolURL, desktopDir)
     elif installChoice == "":
         installNetwork()
         installDell()
         installNAUDrivers()
+        downloadToDir(mediaCreationToolURL, desktopDir)
     else:
-        print("Error: Input value not valid")
-        time.sleep(3)
-        sys.exit()
+        input("Error: Invalid input value\n\nPress ENTER to try again...")
+        os.system('cls' if os.name == 'nt' else 'clear')
+        main()
 
-    # Download Media Creation Tool to Desktop\
-    downloadToDir(mediaCreationToolURL, desktopDir)
         
 
 # Searches direcory for file that contains given keywords
@@ -89,6 +90,7 @@ def downloadToDir(url, outDir):
             file.write(requestor.content)
         except IOError as e:
             print("Error writing file %s" % e)
+            time.sleep(7)
 
         else:
             print("Download of %s Complete" % fileName)
