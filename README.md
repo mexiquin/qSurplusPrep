@@ -7,7 +7,7 @@ and introduces additional functionality that would have been a pain to write in 
 
 ## New Interface Screen
 To be totally honest, nothing much has really changed here, other than the inclusion of a few more install options, as well as
-a cute cow displaying the name of the application.
+a cute cow displaying the name of the application. The goal is to eventually implement an easy to use GUI interface over the course of the application's development.
 
 ## Downloads MediaCreationTool directly from microsoft's Website
 Initially, the media creation tool executable was included on the installation usb and had to manually by copied and pasted
