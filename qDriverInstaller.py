@@ -18,12 +18,19 @@ Steps of Execution:
 
 '''
 
-import os, sys, glob, requests, subprocess, pyfiglet, cowsay, time
+import cowsay
+import glob
+import os
+import pyfiglet
+import requests
+import subprocess
+import time
+
 import timeSet
 
 # constant for finding the scripts dir with all dependencies
 # as well as constant for the desktop directory of any given machine
-scriptsDir =  os.path.join(os.getcwd(), 'Scripts')
+scriptsDir = os.path.join(os.getcwd(), 'Scripts')
 desktopDir = os.path.join(os.environ["USERPROFILE"], "Desktop")
 
 '''
@@ -33,60 +40,65 @@ for each major release of the windows 10 operating system
 '''
 mediaCreationToolURL = "https://go.microsoft.com/fwlink/?LinkId=691209"
 
+
 # Main access point of the program. Runs all functions in order they need to be ran
 def main():
     # Simple main functionality to test if the build with pyInstaller will work
 
     # Welcome interface
-    #printInterface()
+    # printInterface()
     printCowsay("Quinton's Driver Installer: Version 2.0")
     os.chdir(scriptsDir)
 
     # take input for what install is wanted
     print("####### OPTIONS #######\n")
-    installChoice = input("(ENTER) Install Everything (Reccomended)\n(1) Install Network\n(2) Install Dell Command Update\n(3) Install ITS Drivers\n(4) Download Media Creation Tool\n(5) Update system time\n")
+    install_choice = input(
+        "(ENTER) Install Everything (Recommended)\n(1) Install Network\n(2) Install Dell Command Update\n(3) Install "
+        "ITS Drivers\n(4) Download Media Creation Tool\n(5) Update system time\n")
 
-    if "1" in installChoice:
-        installNetwork()
-    elif "2" in installChoice:
-        installDell()
-    elif "3" in installChoice:
+    if "1" in install_choice:
+        install_network()
+    elif "2" in install_choice:
+        install_dell()
+    elif "3" in install_choice:
         installNAUDrivers()
-    elif "4" in installChoice:
-        downloadToDir(mediaCreationToolURL, desktopDir)
-    elif "5" in installChoice:
-		# Fix system clock time so that the rest of the program will run smoothly
+    elif "4" in install_choice:
+        download_to_dir(mediaCreationToolURL, desktopDir)
+    elif "5" in install_choice:
+        # Fix system clock time so that the rest of the program will run smoothly
         timeSet.updateTime()
 
-    elif installChoice == "":
-        installNetwork()
+    elif install_choice == "":
+        install_network()
         timeSet.updateTime()
-        installDell()
+        install_dell()
         installNAUDrivers()
-        downloadToDir(mediaCreationToolURL, desktopDir)
+        download_to_dir(mediaCreationToolURL, desktopDir)
     else:
         input("Error: Invalid input value\n\nPress ENTER to try again...")
         os.system('cls' if os.name == 'nt' else 'clear')
         main()
 
-        
 
 # Searches direcory for file that contains given keywords
-def findExecutable(keyword):
+def find_exec(keyword):
     for name in glob.glob('%s*.exe' % keyword):
         return name
 
+
 # Install Dell Command update for later manual use (Works!)
-def installDell():
-	subprocess.run([findExecutable("DCU"), "/s"])
+def install_dell():
+    subprocess.run([find_exec("DCU"), "/s"])
+
 
 # Install network drivers from SDI Tool. (Works!)
-def installNetwork():
-	subprocess.run([findExecutable("SDI_x64"), "-autoinstall", "-autoclose", "-showconsole", "-nogui"])
+def install_network():
+    subprocess.run([find_exec("SDI_x64"), "-autoinstall", "-autoclose", "-showconsole", "-nogui"])
+
 
 # Download a file from a given URL to the specified directory (Works!)
-def downloadToDir(url, outDir):
-    requestor = requests.get(url, allow_redirects = True)
+def download_to_dir(url, outDir):
+    requestor = requests.get(url, allow_redirects=True)
     fileName = fileNameFromURL(requestor.url)
     directory = '%s/%s' % (outDir, fileName)
 
@@ -94,7 +106,7 @@ def downloadToDir(url, outDir):
     try:
         requestor.raise_for_status()
     except Exception as urlOof:
-        print("Error in acessing URL: %s", urlOof)
+        print("Error in accessing URL: %s", urlOof)
         input("Press ENTER to try again...")
         main()
 
@@ -112,9 +124,11 @@ def downloadToDir(url, outDir):
     else:
         print("Download of %s Complete" % fileName)
 
+
 # Installs the drivers utilizing ITS's driver library
 def installNAUDrivers():
     subprocess.run("NAUDriver.bat")
+
 
 # As of right now, this is unused. Is another option for printing
 # the welcome text
@@ -122,18 +136,22 @@ def printInterface():
     welcomeBanner = pyfiglet.figlet_format("Quinton's\nDriver\nInstaller")
     print(welcomeBanner)
 
+
 # Default methond of displaying the Quinton Driver Installer Text
 def printCowsay(input):
     cowsay.cow(input)
+
 
 # Potential for implementing an instruction manual for any curious technicians
 def printInstructions():
     pass
 
+
 # Finds the name of the file based on the url name (Works!)
 def fileNameFromURL(url):
-	if url.find('/'):
-		return url.rsplit('/', 1)[1]
+    if url.find('/'):
+        return url.rsplit('/', 1)[1]
+
 
 if __name__ == "__main__":
-	main()
+    main()
