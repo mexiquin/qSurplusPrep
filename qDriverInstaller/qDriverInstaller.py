@@ -1,4 +1,3 @@
-
 '''
 Developed by: Quinton Jasper
 Version: 2.0
