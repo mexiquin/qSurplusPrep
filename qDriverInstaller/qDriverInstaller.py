@@ -20,6 +20,7 @@ Steps of Execution:
 '''
 
 import os, sys, glob, requests, subprocess, pyfiglet, cowsay, time
+from timeSet import updateTime
 
 # constant for finding the scripts dir with all dependencies
 # as well as constant for the desktop directory of any given machine
