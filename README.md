@@ -1,6 +1,6 @@
 # Quinton's Driver Installer
 
-###Note:
+### Note:
 The main branch is treated much like an unstable testing branch
 I recommend you download and use the build from the Stable branch. There,
 I will publish the version of the program that is prepared for use
