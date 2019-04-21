@@ -1,4 +1,4 @@
-'''
+"""
 @author Quinton Jasper
 Version: 2.0
 
@@ -16,12 +16,11 @@ Steps of Execution:
 
 4. Download updated Media Creation Tool from microsoft website. Places file on to desktop for easy access
 
-'''
+"""
 
 import cowsay
 import glob
 import os
-import pyfiglet
 import requests
 import subprocess
 import time
@@ -128,13 +127,6 @@ def download_to_dir(url, outDir):
 # Installs the drivers utilizing ITS's driver library
 def installNAUDrivers():
     subprocess.run("NAUDriver.bat")
-
-
-# As of right now, this is unused. Is another option for printing
-# the welcome text
-def printInterface():
-    welcomeBanner = pyfiglet.figlet_format("Quinton's\nDriver\nInstaller")
-    print(welcomeBanner)
 
 
 # Default methond of displaying the Quinton Driver Installer Text
