@@ -1,4 +1,10 @@
-# qSurplusPrep
+# Quinton's Driver Installer
+
+###Note:
+The main branch is treated much like an unstable testing branch
+I recommend you download and use the build from the Stable branch. There,
+I will publish the version of the program that is prepared for use
+on the Surplus floor
 
 This is a rewrite of the original NAU Surplus driver installer I wrote written in Go. This edition is written in python
 and introduces additional functionality that would have been a pain to write in Go.
