@@ -13,3 +13,9 @@ a cute cow displaying the name of the application. The goal is to eventually imp
 Initially, the media creation tool executable was included on the installation usb and had to manually by copied and pasted
 onto the target computer for the Windows 10 update step. Now, the script will download a copy directly from the microsoft website
 and save it to the target computer's Desktop folder
+
+## Auto-Corrects system clock 
+This version of the installer will automatically update the system clock. This
+is always helpful when accessing the internet. If you don't know what I mean,
+most of this program will not work, since it is necessary to access the internet
+to install drivers. And, with the incorrect time, you can not access the internet.
