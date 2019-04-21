@@ -20,13 +20,12 @@ Steps of Execution:
 '''
 
 import os, sys, glob, requests, subprocess, pyfiglet, cowsay, time
-from timeSet import updateTime
+import timeSet
 
 # constant for finding the scripts dir with all dependencies
 # as well as constant for the desktop directory of any given machine
 scriptsDir =  os.path.join(os.getcwd(), 'Scripts')
 desktopDir = os.path.join(os.environ["USERPROFILE"], "Desktop")
-downloadBool = False
 
 '''
 This is a modified url that microsoft uses to redirect to the actual download of MediaCreationToolXXXX.exe
@@ -42,11 +41,11 @@ def main():
     # Welcome interface
     #printInterface()
     printCowsay("Quinton's Driver Installer: Version 2.0")
-
     os.chdir(scriptsDir)
 
     # take input for what install is wanted
-    installChoice = input("(1) Install Network\n(2) Install Dell Command Update\n(3) Install ITS Drivers\n(4) Download Media Creation Tool\n(ENTER) All\n")
+    print("####### OPTIONS #######\n")
+    installChoice = input("(ENTER) Install Everything (Reccomended)\n(1) Install Network\n(2) Install Dell Command Update\n(3) Install ITS Drivers\n(4) Download Media Creation Tool\n(5) Update system time\n")
 
     if "1" in installChoice:
         installNetwork()
@@ -56,8 +55,13 @@ def main():
         installNAUDrivers()
     elif "4" in installChoice:
         downloadToDir(mediaCreationToolURL, desktopDir)
+    elif "5" in installChoice:
+		# Fix system clock time so that the rest of the program will run smoothly
+        timeSet.updateTime()
+
     elif installChoice == "":
         installNetwork()
+        timeSet.updateTime()
         installDell()
         installNAUDrivers()
         downloadToDir(mediaCreationToolURL, desktopDir)
@@ -70,8 +74,8 @@ def main():
 
 # Searches direcory for file that contains given keywords
 def findExecutable(keyword):
-	for name in glob.glob('%s*.exe' % keyword):
-		return name
+    for name in glob.glob('%s*.exe' % keyword):
+        return name
 
 # Install Dell Command update for later manual use (Works!)
 def installDell():
@@ -108,7 +112,6 @@ def downloadToDir(url, outDir):
 
     else:
         print("Download of %s Complete" % fileName)
-
 
 # Installs the drivers utilizing ITS's driver library
 def installNAUDrivers():

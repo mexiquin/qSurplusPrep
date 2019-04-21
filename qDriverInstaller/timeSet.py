@@ -17,6 +17,7 @@ def gettime_ntp(addr='time.nist.gov'):
     TIME1970 = 2208988800      # Thanks to F.Lundh
     client = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
     data = '\x1b' + 47 * '\0'
+    data = data.encode()
     try:
         # Timing out the connection after 5 seconds, if no response received
         client.settimeout(5.0)
@@ -30,6 +31,8 @@ def gettime_ntp(addr='time.nist.gov'):
         return None
 
 def updateTime():
+
+    print("Checking for correct system time...")
     # Iterates over every server in the list until it finds time from any one.
     for server in server_list:
         epoch_time = gettime_ntp(server)

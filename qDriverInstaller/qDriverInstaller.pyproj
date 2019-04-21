@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="admin.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="qDriverInstaller.py" />
     <Compile Include="timeSet.py">
       <SubType>Code</SubType>
