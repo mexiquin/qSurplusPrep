@@ -45,7 +45,7 @@ def main():
     os.chdir(scriptsDir)
 
     # take input for what install is wanted
-    installChoice = input("(1) Install Network\n(2) Install Dell Command Update\n(3) Install ITS Drivers\n(4) Download Media Creation Tool\n(ENTER) Both\n")
+    installChoice = input("(1) Install Network\n(2) Install Dell Command Update\n(3) Install ITS Drivers\n(4) Download Media Creation Tool\n(ENTER) All\n")
 
     if "1" in installChoice:
         installNetwork()
