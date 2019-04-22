@@ -39,7 +39,8 @@ def updateTime():
         if epoch_time is not None:
             # SetSystemTime takes time as argument in UTC time. UTC time is obtained using utcfromtimestamp()
             utcTime = datetime.datetime.utcfromtimestamp(epoch_time)
-            win32api.SetSystemTime(utcTime.year, utcTime.month, utcTime.weekday(), utcTime.day, utcTime.hour, utcTime.minute, utcTime.second, 0)
+            win32api.SetSystemTime(utcTime.year, utcTime.month, utcTime.weekday(), utcTime.day, utcTime.hour,
+                                   utcTime.minute, utcTime.second, 0)
             # Local time is obtained using fromtimestamp()
             localTime = datetime.datetime.fromtimestamp(epoch_time)
             print("Time updated to: " + localTime.strftime("%Y-%m-%d %H:%M") + " from " + server)
