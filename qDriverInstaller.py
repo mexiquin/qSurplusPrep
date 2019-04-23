@@ -144,8 +144,13 @@ def fileNameFromURL(url):
     if url.find('/'):
         return url.rsplit('/', 1)[1]
 
+# Method for creating and eventually populating a scripts folder in case none exists
 def create_scripts():
-    pass
+    try:
+        os.chdir(scriptsDir)
+    except OSError as oopsDirectory:
+        os.makedirs(scriptsDir)
+        os.chdir(scriptsDir)
 
 
 if __name__ == "__main__":

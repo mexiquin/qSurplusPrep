@@ -4,7 +4,6 @@ to the driver install program. (All in the name of simplicity)
 
 @author Quinton Jasper
 """
-import time
 
 import PySimpleGUI as sg
 import qDriverInstaller, os
@@ -26,7 +25,7 @@ window.Close()
 
 value = values[0]
 
-os.chdir(qDriverInstaller.scriptsDir)
+qDriverInstaller.create_scripts()
 
 if "Network" in value:
     qDriverInstaller.install_network()
