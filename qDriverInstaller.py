@@ -79,7 +79,7 @@ def main():
         main()
 
 
-# Searches direcory for file that contains given keywords
+# Searches directory for file that contains given keywords
 def find_exec(keyword):
     for name in glob.glob('%s*.exe' % keyword):
         return name
@@ -87,12 +87,14 @@ def find_exec(keyword):
 
 # Install Dell Command update for later manual use (Works!)
 def install_dell():
-    subprocess.run([find_exec("DCU"), "/s"], shell=True)
+    print("Installing Dell Command Update...\n")
+    subprocess.run([find_exec("DCU"), "/s"])
+    print("Dell Command Update has been installed!")
 
 
 # Install network drivers from SDI Tool. (Works!)
 def install_network():
-    subprocess.run([find_exec("SDI_x64"), "-autoinstall", "-autoclose", "-showconsole", "-nogui"], shell=True)
+    subprocess.run([find_exec("SDI_x64"), "-autoinstall", "-showconsole", "-nogui", "-autoclose"])
 
 
 # Download a file from a given URL to the specified directory (Works!)
@@ -106,8 +108,7 @@ def download_to_dir(url, outDir):
         requestor.raise_for_status()
     except Exception as urlOof:
         print("Error in accessing URL: %s", urlOof)
-        input("Press ENTER to try again...")
-        main()
+        input("Press ENTER to continue...")
 
     print("Downloading %s" % fileName)
 
@@ -126,7 +127,7 @@ def download_to_dir(url, outDir):
 
 # Installs the drivers utilizing ITS's driver library
 def installNAUDrivers():
-    subprocess.run("NAUDriver.bat", shell=True)
+    subprocess.run("NAUDriver.bat")
 
 
 # Default methond of displaying the Quinton Driver Installer Text
