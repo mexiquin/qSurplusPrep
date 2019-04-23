@@ -25,3 +25,8 @@ This version of the installer will automatically update the system clock. This
 is always helpful when accessing the internet. If you don't know what I mean,
 most of this program will not work, since it is necessary to access the internet
 to install drivers. And, with the incorrect time, you can not access the internet.
+
+## *NEW* GUI Implementation
+We now have an easy to use GUI that will save your fingers and sanity from writing the commands
+into the command line. It will be constantly updated and maintained to make sure that nothing breaks
+and that the interface is as easy to understand as possible for our technicians.
