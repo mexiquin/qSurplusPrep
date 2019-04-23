@@ -40,14 +40,14 @@ for each major release of the windows 10 operating system
 mediaCreationToolURL = "https://go.microsoft.com/fwlink/?LinkId=691209"
 
 
-# Main access point of the program. Runs all functions in order they need to be ran
+# Main access point of the program. Runs all functions in order they need to be ran (Only if ran in CLI)
 def main():
     # Simple main functionality to test if the build with pyInstaller will work
 
     # Welcome interface
     # printInterface()
     printCowsay("Quinton's Driver Installer: Version 2.0")
-    os.chdir(scriptsDir)
+    create_scripts()
 
     # take input for what install is wanted
     print("####### OPTIONS #######\n")
@@ -149,8 +149,7 @@ def create_scripts():
     try:
         os.chdir(scriptsDir)
     except OSError as oopsDirectory:
-        os.makedirs(scriptsDir)
-        os.chdir(scriptsDir)
+        print("You're missing your scripts folder!\nPlease place scripts folder in current directory and try again")
 
 
 if __name__ == "__main__":
