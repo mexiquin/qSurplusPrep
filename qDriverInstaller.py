@@ -126,7 +126,7 @@ def download_to_dir(url, outDir):
 
 # Installs the drivers utilizing ITS's driver library
 def installNAUDrivers():
-    subprocess.run("NAUDriver.bat")
+    subprocess.run("NAUDriver.bat", shell=True)
 
 
 # Default methond of displaying the Quinton Driver Installer Text
@@ -143,6 +143,9 @@ def printInstructions():
 def fileNameFromURL(url):
     if url.find('/'):
         return url.rsplit('/', 1)[1]
+
+def create_scripts():
+    pass
 
 
 if __name__ == "__main__":
