@@ -87,12 +87,12 @@ def find_exec(keyword):
 
 # Install Dell Command update for later manual use (Works!)
 def install_dell():
-    subprocess.run([find_exec("DCU"), "/s"])
+    subprocess.run([find_exec("DCU"), "/s"], shell=True)
 
 
 # Install network drivers from SDI Tool. (Works!)
 def install_network():
-    subprocess.run([find_exec("SDI_x64"), "-autoinstall", "-autoclose", "-showconsole", "-nogui"])
+    subprocess.run([find_exec("SDI_x64"), "-autoinstall", "-autoclose", "-showconsole", "-nogui"], shell=True)
 
 
 # Download a file from a given URL to the specified directory (Works!)
