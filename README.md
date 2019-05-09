@@ -30,3 +30,45 @@ to install drivers. And, with the incorrect time, you can not access the interne
 We now have an easy to use GUI that will save your fingers and sanity from writing the commands
 into the command line. It will be constantly updated and maintained to make sure that nothing breaks
 and that the interface is as easy to understand as possible for our technicians.
+
+## How To Make The .exe
+In case you need to "recompile" this code, you're going to need to convert these .py files into a single .exe file.
+To do this, make sure you have a copy of Python 3.7 (the version this code was tested on)
+installed on the computer and make sure _pyinstaller_ is installed using the
+python tool __pip__. 
+
+If you're not sure it is installed, go to a cmd window and type:
+```bash
+pip install pyinstaller
+```
+
+Here, you will need to navigate into the folder containing the .py files (within
+the cmd window). Make yourself familiar with the __cd__ command in the console. For example:
+```bash
+cd Downloads/qSurplusPrep
+```
+
+Once you're in the folder containing all of the .py files, run the command in your
+console:
+```bash
+pyinstaller --uac-admin --onefile userInterface.py
+```
+
+__NOTE__: there is a known issue with this process and the _uac-admin_ command.
+if any errors spring up from this, refer to this stackoverflow page: [PyInstaller UAC Issue](https://stackoverflow.com/questions/43068920/pyinstaller-uac-not-working-in-onefile-mode)
+
+After this command is run, however, it should spit out a .exe file inside of a folder named __dist__
+
+__NOTE__: You're done creating the .exe However, when you put it on a USB, make sure that it is accompanied by
+the _Scripts_ folder, containing all of the install tools. The folder hierarchy should look like this:
+
+* userInterface.exe
+* Scripts
+    * SDI.exe
+    * DCU.exe
+    * etc.
+    
+Where userInterface.exe is the compiled python program to double-click.
+
+I will try to include a copy of the latest working _Scripts_ file so  that you don't have to search around the internet for
+the correct dependencies. (Inside __Latest_Working_Scripts__ folder)
