@@ -1,5 +1,3 @@
-# *NOTE* Development has been moved over to https://gitlab.com/mexiquin/qSurplusPrep
-
 # Quinton's Driver Installer
 
 ### Note:
